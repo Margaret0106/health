@@ -9,6 +9,7 @@ describe('Projects', () => {
       const action = {
         type: 'ADD_PROJECT',
         project: {
+          id: 1,
           name: 'DEMO',
           url: 'https://google.com'
         }
@@ -24,10 +25,12 @@ describe('Projects', () => {
         type: 'ADD_PROJECTS',
         projects: [
           {
+            id: 1,
             name: 'DEMO 1',
             url: 'https://google.com'
           },
           {
+            id: 2,
             name: 'DEMO 2',
             url: 'https://youtube.com'
           }
@@ -37,6 +40,29 @@ describe('Projects', () => {
       const result = projects([], action);
       expect(result.length).toEqual(2);
       expect(result).toEqual(action.projects);
+    });
+
+    test('should delete project from state on DELETE_PROJECT action', () => {
+      const testProjects = [
+        {
+          id: 1,
+          name: 'DEMO 1',
+          url: 'https://google.com'
+        },
+        {
+          id: 2,
+          name: 'DEMO 2',
+          url: 'https://youtube.com'
+        }
+      ];
+      const action = {
+        type: 'DELETE_PROJECT',
+        id: 1
+      }
+
+      const result = projects(testProjects, action);
+      expect(result.length).toEqual(1);
+      expect(result).toContain(testProjects[1]);
     });
   });
 

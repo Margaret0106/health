@@ -30,4 +30,34 @@ describe('Actions', () => {
     const result = actions.addProjects(action.projects);
     expect(result).toEqual(action);
   });
+
+  test('should generate DELETE_PROJECT action', () => {
+    const action = {
+      type: 'DELETE_PROJECT',
+      id: 1
+    };
+
+    const result = actions.deleteProject(action.id);
+    expect(result).toEqual(action);
+  });
+
+  test('should generate CONFIRM_DELETE_PROJECT action', () => {
+    const action = {
+      type: 'CONFIRM_DELETE_PROJECT',
+      id: 1
+    };
+
+    const result = actions.confirmDeleteProject(action.id);
+    expect(result).toEqual(action);
+  });
+
+  test('should generate EDIT_PROJECT action', () => {
+    const action = {
+      type: 'EDIT_PROJECT',
+      id: 1
+    };
+
+    const result = actions.editProject(action.id);
+    expect(result).toEqual(action);
+  });
 });

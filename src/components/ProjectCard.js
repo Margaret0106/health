@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Card, Button, Label } from 'semantic-ui-react';
+import {connect} from 'react-redux';
+import { Card, Button, Label, Dropdown } from 'semantic-ui-react';
 import moment from 'moment';
+import * as actions from './../actions/actions';
 
-export default class ProjectCard extends Component {
+export class ProjectCard extends Component {
   getColor = () => {
     const { availability } = this.props;
-    if (availability === null) {
+    if (!availability) {
       return 'grey';
     }
 
@@ -25,7 +27,7 @@ export default class ProjectCard extends Component {
 
   getLastCheckDate = () => {
     const { availability } = this.props;
-    if (availability === null) {
+    if (!availability) {
       return 'Never checked';
     }
     const checkedAt = moment(availability.createdAt).format('LL');
@@ -50,12 +52,21 @@ export default class ProjectCard extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <div className='ui two buttons'>
-            <Button basic color='green'>Approve</Button>
-            <Button basic color='red'>Decline</Button>
-          </div>
+
+          <Dropdown text='Actions'>
+            <Dropdown.Menu>
+              <Dropdown.Item text='Check availability' />
+
+              <Dropdown.Divider />
+              
+              <Dropdown.Item icon='folder' text='Edit' />
+              <Dropdown.Item icon='trash' text='Delete' />
+            </Dropdown.Menu>
+          </Dropdown>
         </Card.Content>
       </Card>
     );
   }
 }
+
+export default connect((state) => state, actions)(ProjectCard);

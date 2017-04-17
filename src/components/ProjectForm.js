@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Input } from 'semantic-ui-react';
+
+export const requiredInput = (placeholder) => {
+  return (field) => <Input
+    label={{ icon: 'asterisk' }}
+    labelPosition='left corner'
+    placeholder={placeholder}
+    {...field.input}
+  />
+};
+
+export const simpleInput = (placeholder) => {
+  return (field) => <Input placeholder={placeholder} {...field.input} />
+};
 
 class ProjectForm extends Component {
   render() {
@@ -12,11 +25,15 @@ class ProjectForm extends Component {
             <form onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="title">Project title</label>
-                <Field name="title" component="input" type="text"/>
+                <Field name="title" component={requiredInput('Project title')} type="text"/>
               </div>
               <div>
                 <label htmlFor="url">Project URL</label>
-                <Field name="url" component="input" type="text"/>
+                <Field name="url" component={requiredInput('http://example.com')} type="text"/>
+              </div>
+              <div>
+                <label htmlFor="url">Health script URL</label>
+                <Field name="healthUrl" component={simpleInput('http://example.com/rf-health.php/')} type="text"/>
               </div>
               <Button basic color='green'>Submit</Button>
             </form>
