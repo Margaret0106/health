@@ -1,9 +1,11 @@
 import axios from 'axios';
 import qs from 'qs';
 
+const apiPath = process.env.REACT_APP_API_PATH;
+
 const apiUrls = {
-  getProjects: 'http://api.health.rocketfirm.net/v1/projects/',
-  postProjects: 'http://api.health.rocketfirm.net/v1/projects/'
+  getProjects: `${apiPath}/v1/projects/`,
+  postProjects: `${apiPath}/v1/projects/`
 };
 
 export const getProjects = () => axios.get(apiUrls.getProjects);

@@ -1,22 +1,52 @@
 import React, { Component } from 'react';
-import { Card, Button, Image } from 'semantic-ui-react';
+import { Card, Button, Label } from 'semantic-ui-react';
+import moment from 'moment';
 
 export default class ProjectCard extends Component {
+  getColor = () => {
+    const { availability } = this.props;
+    if (availability === null) {
+      return 'grey';
+    }
+
+    switch(availability.status) {
+      case 10:
+        return 'green';
+      case 20:
+        return 'orange';
+      case 30:
+        return 'red';
+      case 40:
+        return 'grey';
+    };
+
+    return 'grey';
+  };
+
+  getLastCheckDate = () => {
+    const { availability } = this.props;
+    if (availability === null) {
+      return 'Never checked';
+    }
+    const checkedAt = moment(availability.createdAt).format('LL');
+
+    return `Last checked ${checkedAt}`;
+  };
+
   render() {
     const { title } = this.props;
 
     return (
       <Card>
         <Card.Content>
-          <Image floated='right' size='mini' src='/assets/images/avatar/large/steve.jpg' />
           <Card.Header>
-            { title }
+            <Label circular color={this.getColor()} empty/>
+            { ` ${title}` }
           </Card.Header>
           <Card.Meta>
-            Friends of Elliot
+            { this.getLastCheckDate() }
           </Card.Meta>
           <Card.Description>
-            Steve wants to add you to the group <strong>best friends</strong>
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
