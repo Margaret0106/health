@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { Card, Button, Label, Dropdown } from 'semantic-ui-react';
+import { Card, Label, Dropdown } from 'semantic-ui-react';
 import moment from 'moment';
 import * as actions from './../actions/actions';
+import ConfirmModal from './ConfirmModal';
 
 export class ProjectCard extends Component {
   getColor = () => {
@@ -20,9 +21,9 @@ export class ProjectCard extends Component {
         return 'red';
       case 40:
         return 'grey';
+      default:
+        return 'grey';
     };
-
-    return 'grey';
   };
 
   getLastCheckDate = () => {
@@ -60,7 +61,15 @@ export class ProjectCard extends Component {
               <Dropdown.Divider />
 
               <Dropdown.Item icon='folder' text='Edit' />
-              <Dropdown.Item icon='trash' text='Delete' onClick={ () => startDeleteProject(id) } />
+
+              <ConfirmModal
+                onConfirm={ () => startDeleteProject(id) }
+                title='Delete project?'
+                description={`This operation will delete ${title} and it's history. It cannot be undone!`}
+                >
+                <Dropdown.Item icon='trash' text='Delete'  />
+              </ConfirmModal>
+
             </Dropdown.Menu>
           </Dropdown>
         </Card.Content>

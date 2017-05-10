@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { Card, Dropdown } from 'semantic-ui-react';
 import * as actions from './../actions/psAccountsActions';
 
+import ConfirmModal from './ConfirmModal';
 import PsProduct from './PsProduct';
 
 export class PsAccountCard extends Component {
@@ -33,7 +34,13 @@ export class PsAccountCard extends Component {
               <Dropdown.Divider />
 
               <Dropdown.Item icon='folder' text='Edit' />
-              <Dropdown.Item icon='trash' text='Delete' onClick={() => startDeletePsAccount(id)} />
+              <ConfirmModal
+                onConfirm={ () => startDeletePsAccount(id) }
+                title='Delete project?'
+                description={`This operation will delete ${username} and it's project. It cannot be undone!`}
+                >
+                <Dropdown.Item icon='trash' text='Delete' />
+              </ConfirmModal>
             </Dropdown.Menu>
           </Dropdown>
         </Card.Content>
