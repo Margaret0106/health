@@ -52,11 +52,7 @@ export const cancelEditProject = (id) => {
 export const startAddProject = (project) => {
   return (dispatch, getState) => {
     return HealthAPI.addProject(project).then((response) => {
-      if (response.data.success === true) {
-        dispatch(addProject(response.data.project));
-      } else {
-        console.log('Error adding project', response.data);
-      }
+      dispatch(addProject(response.data));
     });
   };
 };

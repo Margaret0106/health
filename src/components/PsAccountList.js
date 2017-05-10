@@ -16,6 +16,7 @@ export default class PsAccounts extends React.Component {
 
   render() {
     const {psAccounts} = this.props;
+    console.log(psAccounts);
 
     const renderPsAccounts = () => {
       return this.props.psAccounts.map(account => <PsAccountCard {...account} key={account.id} />);

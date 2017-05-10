@@ -30,13 +30,13 @@ export class ProjectCard extends Component {
     if (!availability) {
       return 'Never checked';
     }
-    const checkedAt = moment(availability.createdAt).format('LL');
+    const checkedAt = moment(availability.createdAt).format('LL [at] h:mm');
 
     return `Last checked ${checkedAt}`;
   };
 
   render() {
-    const { title } = this.props;
+    const { id, title, startDeleteProject } = this.props;
 
     return (
       <Card>
@@ -58,9 +58,9 @@ export class ProjectCard extends Component {
               <Dropdown.Item text='Check availability' />
 
               <Dropdown.Divider />
-              
+
               <Dropdown.Item icon='folder' text='Edit' />
-              <Dropdown.Item icon='trash' text='Delete' />
+              <Dropdown.Item icon='trash' text='Delete' onClick={ () => startDeleteProject(id) } />
             </Dropdown.Menu>
           </Dropdown>
         </Card.Content>

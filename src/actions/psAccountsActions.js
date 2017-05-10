@@ -52,7 +52,7 @@ export const cancelEditPsAccount = (id) => {
 export const startAddPsAccount = (psAccount) => {
   return (dispatch, getState) => {
     return HealthAPI.addPsAccount(psAccount).then((response) => {
-      dispatch(addPsAccount(response.data.psAccount));
+      dispatch(addPsAccount(response.data));
     });
   };
 };
