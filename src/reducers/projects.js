@@ -8,7 +8,6 @@ export default (state = [], action) => {
 
     case 'ADD_PROJECTS':
       return [
-        ...state,
         ...action.projects
       ];
 
