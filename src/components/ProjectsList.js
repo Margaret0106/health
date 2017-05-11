@@ -10,6 +10,10 @@ class ProjectsList extends Component {
     startAddProject(project);
   };
 
+  componentDidMount() {
+    this.props.startAddProjects();
+  }
+
   render() {
     const { projects } = this.props;
 

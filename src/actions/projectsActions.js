@@ -49,6 +49,10 @@ export const cancelEditProject = (id) => {
   }
 }
 
+export const activeRequest = () => {
+
+};
+
 export const startAddProject = (project) => {
   return (dispatch, getState) => {
     return HealthAPI.addProject(project).then((response) => {
@@ -60,7 +64,6 @@ export const startAddProject = (project) => {
 export const startAddProjects = () => {
   return (dispatch, getState) => {
     return HealthAPI.getProjects().then((response) => {
-      console.log('Got some projects', response.data);
       dispatch(addProjects(response.data));
     });
   };

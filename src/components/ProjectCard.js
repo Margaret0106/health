@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Card, Label, Dropdown } from 'semantic-ui-react';
 import moment from 'moment';
-import * as actions from './../actions/actions';
+import * as actions from './../actions/projectsActions';
 import ConfirmModal from './ConfirmModal';
 
 export class ProjectCard extends Component {

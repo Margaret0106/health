@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Card, Button, Input } from 'semantic-ui-react';
-
-export const requiredInput = (placeholder) => {
-  return (field) => <Input
-    label={{ icon: 'asterisk' }}
-    labelPosition='left corner'
-    placeholder={placeholder}
-    {...field.input}
-  />
-};
+import { Card, Button, Input, Form, Icon } from 'semantic-ui-react';
 
 export const simpleInput = (placeholder) => {
-  return (field) => <Input placeholder={placeholder} {...field.input} />
+  return (field) => <Input fluid placeholder={placeholder} {...field.input} />
 };
 
 class PsAccountForm extends Component {
@@ -21,19 +12,21 @@ class PsAccountForm extends Component {
     return (
       <Card>
         <Card.Content>
+          <Card.Header>
+            <Icon name='plus'/> Add account
+          </Card.Header>
           <Card.Description>
-            <form onSubmit={handleSubmit}>
-              <div>
+            <Form onSubmit={handleSubmit}>
+              <Form.Field required>
                 <label htmlFor="username">Account username:</label>
-                <Field name="username" component={requiredInput('Enter username')} type="text"/>
-              </div>
-              <div>
+                <Field name="username" component={simpleInput('Enter username')} type="text"/>
+              </Form.Field>
+              <Form.Field required>
                 <label htmlFor="password">Account password:</label>
-                <Field name="password" component={requiredInput('Get it from PS support')} type="password"/>
-              </div>
-              <br />
-              <Button basic color='green'>Submit</Button>
-            </form>
+                <Field name="password" component={simpleInput('Get it from PS support')} type="password"/>
+              </Form.Field>
+              <Button fluid basic color='green'>Submit</Button>
+            </Form>
           </Card.Description>
         </Card.Content>
       </Card>
